@@ -2,10 +2,10 @@
   "name": "chackit",
   "version": "1.0.0",
   "description": "독서 기록 플랫폼 ChackIt의 API 서버",
-  "main": "index.js",
+  "main": "dist/app.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon app"
+    "start": "concurrently \"tsc -w\" \"nodemon ./dist/app\""
   },
   "author": "YUN",
   "license": "ISC",
@@ -16,6 +16,11 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9",
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9",
+    "typescript": "^5.7.3"
   }
 }

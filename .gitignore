@@ -1,11 +1,7 @@
 # Yarn 4 PnP 의존성 관련 파일
 .pnp.*
 .pnp.js
-.yarn/cache/
-.yarn/patches/
-.yarn/releases/
-.yarn/plugins/
-.yarn/unplugged
+.yarn/
 
 # 디버그 파일
 debug/
