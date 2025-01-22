@@ -1,0 +1,21 @@
+# Yarn 4 PnP 의존성 관련 파일
+.pnp.*
+.pnp.js
+.yarn/cache/
+.yarn/patches/
+.yarn/releases/
+.yarn/plugins/
+.yarn/unplugged
+
+# 디버그 파일
+debug/
+
+# 환경설정 파일
+.env
+
+# 빌드 파일
+dist/
+build/
+
+# .vscode 설정 파일
+.vscode/
