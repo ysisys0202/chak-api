@@ -12,9 +12,10 @@ type Review = {
   rating: number;
   review_content: string;
   oneline_review?: string;
+  isPublic: boolean;
 };
 
-const reviews: Review[] = [
+let reviews: Review[] = [
   {
     id: "1",
     userId: "user01",
@@ -25,6 +26,7 @@ const reviews: Review[] = [
     rating: 4,
     review_content: "흥미로운 시작! 앞으로의 전개가 기대돼요.",
     oneline_review: "서두가 인상적인 책이에요.",
+    isPublic: true,
   },
   {
     id: "2",
@@ -38,6 +40,7 @@ const reviews: Review[] = [
     rating: 3,
     review_content: "읽다가 잠시 멈췄지만 다시 도전하고 싶어요.",
     oneline_review: "지금은 소화하기 어려운 책.",
+    isPublic: true,
   },
   {
     id: "3",
@@ -50,6 +53,7 @@ const reviews: Review[] = [
     rating: 5,
     review_content: "마지막까지 손에서 놓을 수 없었던 책!",
     oneline_review: "완벽한 작품.",
+    isPublic: true,
   },
   {
     id: "4",
@@ -61,6 +65,7 @@ const reviews: Review[] = [
     rating: 4,
     review_content: "중반부가 흥미진진합니다.",
     oneline_review: "다음 챕터가 궁금해요.",
+    isPublic: true,
   },
   {
     id: "5",
@@ -73,6 +78,7 @@ const reviews: Review[] = [
     rating: 2,
     review_content: "아직은 잘 모르겠어요. 다시 읽어볼 예정입니다.",
     oneline_review: "취향에 안 맞을 수도?",
+    isPublic: true,
   },
   {
     id: "6",
@@ -85,6 +91,7 @@ const reviews: Review[] = [
     rating: 5,
     review_content: "완벽한 캐릭터와 스토리 전개!",
     oneline_review: "강력 추천!",
+    isPublic: false,
   },
   {
     id: "7",
@@ -97,6 +104,7 @@ const reviews: Review[] = [
     rating: 3,
     review_content: "초반은 좋았지만 후반부가 아쉬워요.",
     oneline_review: "평범한 마무리.",
+    isPublic: true,
   },
   {
     id: "8",
@@ -108,6 +116,7 @@ const reviews: Review[] = [
     rating: 4,
     review_content: "천천히 음미하면서 읽고 있는 중입니다.",
     oneline_review: "깊이 있는 책.",
+    isPublic: true,
   },
   {
     id: "9",
@@ -120,6 +129,7 @@ const reviews: Review[] = [
     rating: 3,
     review_content: "잠시 멈췄지만, 다시 돌아올 거예요.",
     oneline_review: "중간 부분이 어렵습니다.",
+    isPublic: false,
   },
   {
     id: "10",
@@ -132,9 +142,47 @@ const reviews: Review[] = [
     rating: 4,
     review_content: "느리지만 여운이 남는 책이었어요.",
     oneline_review: "생각하게 만드는 책.",
+    isPublic: true,
   },
 ];
 
-export const getAll = async (): Promise<Review[]> => {
+export const getAll = (): Review[] => {
   return reviews;
+};
+
+export const getAllByUserId = (userId: string): Review[] => {
+  return reviews.filter((review) => review.userId === userId);
+};
+
+export const getById = (id: string): Review | undefined => {
+  return reviews.find((review) => review.id === id);
+};
+
+export const getAllPublic = (): Review[] => {
+  return reviews.filter((review) => review.isPublic);
+};
+
+export const getAllPrivate = (): Review[] => {
+  return reviews.filter((review) => !review.isPublic);
+};
+
+export const create = (data: Review): Review => {
+  reviews = [data, ...reviews];
+  return data;
+};
+
+export const update = (id: string, data: Review): Review | undefined => {
+  const reviewIndex = reviews.findIndex((review) => review.id === id);
+
+  if (reviewIndex === -1) {
+    return undefined;
+  }
+
+  reviews[reviewIndex] = { ...reviews[reviewIndex], ...data };
+
+  return reviews[reviewIndex];
+};
+
+export const remove = (id: string) => {
+  reviews.filter((review) => review.id !== id);
 };
