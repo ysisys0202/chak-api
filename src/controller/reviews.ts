@@ -11,8 +11,6 @@ export const getReviews = async (
     ? reviewsRepository.getAllByUserId(userId)
     : reviewsRepository.getAll();
 
-  console.log(userId);
-
   res.status(200).json(reviews);
 };
 
@@ -27,7 +25,6 @@ export const getPublicReviews = async (
 
 export const getReview = async (req: Request, res: Response): Promise<void> => {
   const id = req.params.id as string;
-  console.log(id);
   const review = reviewsRepository.getById(id);
   if (!review) {
     res

@@ -3,7 +3,6 @@ dotenv.config();
 
 const getEnv = (key: string, defaultValue?: string): string => {
   const value = process.env[key] || defaultValue;
-  console.log(value);
   if (!value) {
     throw new Error(`${key}는 정의되지 않은 환경변수입니다.`);
   }
