@@ -9,16 +9,13 @@ const ReadingStateSchema = z.union(
 );
 
 export const ReviewSchema = z.object({
-  id: z.string(),
-  userId: z.string(),
-  bookId: z.string({
+  userId: z.number(),
+  bookId: z.number({
     required_error: "책 정보를 입력해주세요.",
   }),
   readingStatus: ReadingStateSchema,
   startDate: z.date().optional(),
   endDate: z.date().optional(),
-  createdAt: z.date(),
-  updatedAt: z.date().optional(),
   rating: z
     .number({
       required_error: "별점을 입력해주세요.",

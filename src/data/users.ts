@@ -8,7 +8,10 @@ import {
 } from "sequelize";
 import { sequelize } from "../db/database.js";
 
-class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+export class User extends Model<
+  InferAttributes<User>,
+  InferCreationAttributes<User>
+> {
   declare id: CreationOptional<number>;
   declare loginId: string;
   declare nickname: string;

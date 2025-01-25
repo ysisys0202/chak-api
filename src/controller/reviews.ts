@@ -7,9 +7,9 @@ export const getReviews = async (
 ): Promise<void> => {
   const userId = req.query.userId as string;
 
-  const reviews = userId
+  const reviews = await (userId
     ? reviewsRepository.getAllByUserId(userId)
-    : reviewsRepository.getAll();
+    : reviewsRepository.getAll());
 
   res.status(200).json(reviews);
 };
@@ -18,14 +18,14 @@ export const getPublicReviews = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const reviews = reviewsRepository.getAllPublic();
+  const reviews = await reviewsRepository.getAllPublic();
 
   res.status(200).json(reviews);
 };
 
 export const getReview = async (req: Request, res: Response): Promise<void> => {
   const id = req.params.id as string;
-  const review = reviewsRepository.getById(id);
+  const review = await reviewsRepository.getById(id);
   if (!review) {
     res
       .status(404)
@@ -37,8 +37,7 @@ export const getReview = async (req: Request, res: Response): Promise<void> => {
 
 export const createReview = async (req: Request, res: Response) => {
   const data = req.body;
-  const review = reviewsRepository.create({
-    id: new Date().toString(),
+  const review = await reviewsRepository.create({
     ...data,
   });
   res.status(201).json(review);
@@ -47,7 +46,7 @@ export const createReview = async (req: Request, res: Response) => {
 export const updateReview = async (req: Request, res: Response) => {
   const id = req.params.id;
   const data = req.body;
-  const review = reviewsRepository.update(id, data);
+  const review = await reviewsRepository.update(id, data);
   if (!review) {
     res
       .status(404)
@@ -58,7 +57,7 @@ export const updateReview = async (req: Request, res: Response) => {
 
 export const removeReview = async (req: Request, res: Response) => {
   const id = req.params.id;
-  reviewsRepository.remove(id);
+  await reviewsRepository.remove(id);
 
   res
     .status(204)
