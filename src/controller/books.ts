@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as booksRepository from "../data/books.js";
-import { generateNotFoundMessage } from "src/utils/message.js";
+import { generateNotFoundMessage } from "../utils/message.js";
 
 export const getBooks = async (req: Request, res: Response) => {
   const { title } = req.query;
