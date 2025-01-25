@@ -9,7 +9,7 @@ const getEnv = (key: string, defaultValue?: string): string => {
   return value;
 };
 
-export const envConfig = {
+export const env = {
   jwt: {
     secretKey: getEnv("JWT_SECRET_KEY"),
     expiredSec: getEnv("JWT_EXPIRED_SEC"),

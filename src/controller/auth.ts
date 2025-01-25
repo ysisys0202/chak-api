@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import * as UserRepository from "../data/users.js";
-import { envConfig } from "../utils/envConfig.js";
+import { env } from "../utils/envConfig.js";
 
 export const signup = async (req: Request, res: Response) => {
   const { nickname, name, email, password, profileImage } = req.body;
@@ -25,7 +25,7 @@ export const signup = async (req: Request, res: Response) => {
   }
   const hashedPassword = await bcrypt.hash(
     password,
-    Number(envConfig.jwt.bcryptSaltRounds)
+    Number(env.jwt.bcryptSaltRounds)
   );
   const userId = await UserRepository.createUser({
     name,
@@ -64,8 +64,8 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const createJwtToken = (id: string) => {
-  return jwt.sign({ id }, envConfig.jwt.secretKey, {
-    expiresIn: envConfig.jwt.expiredSec,
+  return jwt.sign({ id }, env.jwt.secretKey, {
+    expiresIn: env.jwt.expiredSec,
   });
 };
 

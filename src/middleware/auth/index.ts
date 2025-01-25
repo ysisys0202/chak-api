@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { VerifyCallback, VerifyOptions } from "jsonwebtoken";
-import { envConfig } from "../../utils/envConfig.js";
+import { env } from "../../utils/envConfig.js";
 import * as UserRepository from "../../data/users.js";
 
 const AUTH_ERROR = { message: "Authentication Error" };
@@ -17,7 +17,7 @@ export const isAuth = async (
   }
 
   const token = authHeader.split(" ")[1];
-  jwt.verify(token, envConfig.jwt.secretKey, async (error, decoded) => {
+  jwt.verify(token, env.jwt.secretKey, async (error, decoded) => {
     if (error) {
       res.status(401).json(AUTH_ERROR);
       return;
