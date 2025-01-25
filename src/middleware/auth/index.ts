@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import jwt, { VerifyCallback, VerifyOptions } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { env } from "../../utils/envConfig.js";
 import * as UserRepository from "../../data/users.js";
 

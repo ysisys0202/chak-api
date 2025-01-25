@@ -5,18 +5,23 @@ import * as UserRepository from "../data/users.js";
 import { env } from "../utils/envConfig.js";
 
 export const signup = async (req: Request, res: Response) => {
-  const { nickname, name, email, password, profileImage } = req.body;
-  const isNameDuplicate = UserRepository.findUser("name", name);
+  const { nickname, loginId, email, password, profileImage } = req.body;
+  const isNameDuplicate = await UserRepository.findUser("loginId", loginId);
   if (isNameDuplicate) {
-    res.status(409).json({ message: `${name}은 이미 존재하는 아이디입니다.` });
+    res
+      .status(409)
+      .json({ message: `${loginId}은 이미 존재하는 아이디입니다.` });
     return;
   }
-  const isEmailDuplicate = UserRepository.findUser("email", email);
+  const isEmailDuplicate = await UserRepository.findUser("email", email);
   if (isEmailDuplicate) {
     res.status(409).json({ message: `${email}은 이미 존재하는 이메일입니다.` });
     return;
   }
-  const isNickNameDuplicate = UserRepository.findUser("nickname", nickname);
+  const isNickNameDuplicate = await UserRepository.findUser(
+    "nickname",
+    nickname
+  );
   if (isNickNameDuplicate) {
     res
       .status(409)
@@ -28,7 +33,7 @@ export const signup = async (req: Request, res: Response) => {
     Number(env.jwt.bcryptSaltRounds)
   );
   const userId = await UserRepository.createUser({
-    name,
+    loginId,
     password: hashedPassword,
     nickname,
     email,
@@ -37,12 +42,12 @@ export const signup = async (req: Request, res: Response) => {
 
   const token = createJwtToken(userId);
 
-  res.status(201).json({ token, name });
+  res.status(201).json({ token, loginId });
 };
 
 export const login = async (req: Request, res: Response) => {
-  const { name, password } = req.body;
-  const user = await UserRepository.findUser("name", name);
+  const { loginId, password } = req.body;
+  const user = await UserRepository.findUser("loginId", loginId);
   if (!user) {
     res.status(401).json({
       message:
@@ -60,20 +65,20 @@ export const login = async (req: Request, res: Response) => {
     return;
   }
   const token = createJwtToken(user.id);
-  res.status(200).json({ token, name });
+  res.status(200).json({ token, loginId });
 };
 
-export const createJwtToken = (id: string) => {
+export const createJwtToken = (id: number) => {
   return jwt.sign({ id }, env.jwt.secretKey, {
     expiresIn: env.jwt.expiredSec,
   });
 };
 
 export const me = async (req: Request, res: Response) => {
-  const user = await UserRepository.findUser("id", req.userId as string);
+  const user = await UserRepository.findUser("id", String(req.userId));
   if (!user) {
     res.status(404).json({ message: "존재하지 않는 사용자입니다." });
     return;
   }
-  res.status(200).json({ token: req.token, username: user.name });
+  res.status(200).json({ token: req.token, username: user.loginId });
 };

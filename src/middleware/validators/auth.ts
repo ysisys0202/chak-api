@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const LoginSchema = z.object({
-  name: z.string({
+  loginId: z.string({
     required_error: "아이디를 입력해주세요.",
   }),
   password: z.string({
