@@ -15,4 +15,11 @@ export const env = {
     expiredSec: getEnv("JWT_EXPIRED_SEC"),
     bcryptSaltRounds: getEnv("JWT_BCRYPT_SALT_ROUNDS"),
   },
+  db: {
+    host: getEnv("DB_HOST"),
+    user: getEnv("DB_USER"),
+    database: getEnv("DB_DATABASE"),
+    password: getEnv("DB_PASSWORD"),
+    port: getEnv("DB_PORT"),
+  },
 };

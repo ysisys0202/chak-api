@@ -1,9 +1,11 @@
 import express, { Request, Response, NextFunction } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import { sequelize } from "./db/database.js";
 import ReviewsRouter from "./router/reviews.js";
 import BooksRouter from "./router/books.js";
 import AuthRouter from "./router/auth.js";
+
 const app = express();
 
 app.use(express.json());
@@ -23,6 +25,8 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   res.send(500);
 });
 
-app.listen(8080, () => {
-  console.log("server started");
+sequelize.sync().then(() => {
+  app.listen(8080, () => {
+    console.log("server started");
+  });
 });
