@@ -1,4 +1,5 @@
 import {
+  CreationOptional,
   DataTypes,
   InferAttributes,
   InferCreationAttributes,
@@ -16,6 +17,7 @@ export class Book extends Model<
   declare publisher: string;
   declare isbn: string;
   declare pubdate: Date;
+  declare thumbnailImage: CreationOptional<string>;
 }
 
 Book.init(
@@ -46,6 +48,7 @@ Book.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
+    thumbnailImage: DataTypes.TEXT,
   },
   {
     sequelize,
