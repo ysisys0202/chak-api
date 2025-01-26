@@ -10,6 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "typeRoots": ["./types"]
+    "typeRoots": ["src/types"]
   }
 }

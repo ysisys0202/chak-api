@@ -4,15 +4,15 @@ import { generateNotFoundMessage } from "../utils/message.js";
 
 export const getBooks = async (req: Request, res: Response) => {
   const { title } = req.query;
-  const books = title
+  const books = await (title
     ? booksRepository.getAllByTitle(title as string)
-    : booksRepository.getAll();
+    : booksRepository.getAll());
   res.status(200).json(books);
 };
 
 export const getBook = async (req: Request, res: Response) => {
   const { isbn } = req.params;
-  const book = booksRepository.getByIsbn(isbn);
+  const book = await booksRepository.getByIsbn(isbn);
   if (!book) {
     res
       .status(404)
@@ -23,6 +23,6 @@ export const getBook = async (req: Request, res: Response) => {
 
 export const createBook = async (req: Request, res: Response) => {
   const book = req.body;
-  booksRepository.createBook(book);
+  await booksRepository.createBook(book);
   res.status(201).json(book);
 };

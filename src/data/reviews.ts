@@ -8,6 +8,7 @@ import {
   InferCreationAttributes,
   Model,
 } from "sequelize";
+import { Book } from "./books.js";
 
 class Review extends Model<
   InferAttributes<Review>,
@@ -79,6 +80,7 @@ Review.init(
 );
 
 Review.belongsTo(User, { foreignKey: "userId" });
+Review.belongsTo(Book, { foreignKey: "bookId" });
 
 export const getAll = async () => {
   return await Review.findAll();
