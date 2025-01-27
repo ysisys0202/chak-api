@@ -1,15 +1,17 @@
 import { User } from "./users.js";
 
 import { sequelize } from "../db/database.js";
-import {
+import SQ, {
   CreationOptional,
   DataTypes,
+  FindOptions,
   InferAttributes,
   InferCreationAttributes,
   Model,
 } from "sequelize";
 import { Book } from "./books.js";
 
+const Sequelize = SQ.Sequelize;
 class Review extends Model<
   InferAttributes<Review>,
   InferCreationAttributes<Review>
@@ -82,24 +84,60 @@ Review.init(
 Review.belongsTo(User, { foreignKey: "userId" });
 Review.belongsTo(Book, { foreignKey: "bookId" });
 
+const includeBook: FindOptions<InferAttributes<Review, { omit: never }>> = {
+  attributes: [
+    "id",
+    "userId",
+    "readingStatus",
+    "startDate",
+    "endDate",
+    "rating",
+    "title",
+    "reviewDetail",
+    "reviewOneline",
+    "isPublic",
+    [Sequelize.col("Book.id"), "bookId"],
+    [Sequelize.col("Book.title"), "bookTitle"],
+    [Sequelize.col("Book.author"), "bookAuthor"],
+    [Sequelize.col("Book.publisher"), "bookPublisher"],
+    [Sequelize.col("Book.thumbnailImage"), "bookThumbnailImage"],
+  ],
+  include: {
+    model: Book,
+    attributes: [],
+  },
+};
+
 export const getAll = async () => {
-  return await Review.findAll();
+  return await Review.findAll(includeBook);
 };
 
 export const getAllByUserId = async (userId: string) => {
-  return await Review.findAll({ where: { userId } });
+  return await Review.findAll({
+    where: { userId },
+    ...includeBook,
+  });
 };
 
 export const getById = async (id: string) => {
-  return await Review.findOne({ where: { id } });
+  return await Review.findOne({
+    where: { id },
+    ...includeBook,
+  });
 };
 
 export const getAllPublic = async () => {
-  return await Review.findAll({ where: { isPublic: true } });
+  return await Review.findAll({
+    where: { isPublic: true },
+    ...includeBook,
+  });
 };
 
 export const getAllPrivate = async () => {
-  return await Review.findAll({ where: { isPublic: false } });
+  return await Review.findAll({
+    where: { isPublic: false },
+    ...includeBook,
+  });
 };
 
 export const create = async (data: Omit<InferAttributes<Review>, "id">) => {
