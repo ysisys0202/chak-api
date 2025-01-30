@@ -8,6 +8,10 @@ import ReviewsRouter from "./router/reviews.js";
 import BooksRouter from "./router/books.js";
 import AuthRouter from "./router/auth.js";
 import { env } from "./utils/envConfig.js";
+import swaggerUI from "swagger-ui-express";
+import swaggerDocument from "../swagger-output.json" assert { type: "json" };
+
+console.log("swagger");
 
 const app = express();
 
@@ -26,6 +30,8 @@ app.use(morgan("tiny"));
 app.use("/reviews", ReviewsRouter);
 app.use("/books", BooksRouter);
 app.use("/auth", AuthRouter);
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.send(404);
