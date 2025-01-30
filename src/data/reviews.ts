@@ -84,7 +84,9 @@ Review.init(
 Review.belongsTo(User, { foreignKey: "userId" });
 Review.belongsTo(Book, { foreignKey: "bookId" });
 
-const includeBook: FindOptions<InferAttributes<Review, { omit: never }>> = {
+const includeAssociations: FindOptions<
+  InferAttributes<Review, { omit: never }>
+> = {
   attributes: [
     "id",
     "userId",
@@ -96,52 +98,65 @@ const includeBook: FindOptions<InferAttributes<Review, { omit: never }>> = {
     "reviewDetail",
     "reviewOneline",
     "isPublic",
+    "createdAt",
+    "updatedAt",
+    [Sequelize.col("User.id"), "userId"],
+    [Sequelize.col("User.nickname"), "userNickname"],
+    [Sequelize.col("User.profileImage"), "userProfileImage"],
     [Sequelize.col("Book.id"), "bookId"],
     [Sequelize.col("Book.title"), "bookTitle"],
     [Sequelize.col("Book.author"), "bookAuthor"],
     [Sequelize.col("Book.publisher"), "bookPublisher"],
     [Sequelize.col("Book.thumbnailImage"), "bookThumbnailImage"],
   ],
-  include: {
-    model: Book,
-    attributes: [],
-  },
+  include: [
+    {
+      model: Book,
+      attributes: [],
+    },
+    {
+      model: User,
+      attributes: [],
+    },
+  ],
 };
 
 export const getAll = async () => {
-  return await Review.findAll(includeBook);
+  return await Review.findAll(includeAssociations);
 };
 
 export const getAllByUserId = async (userId: string) => {
   return await Review.findAll({
     where: { userId },
-    ...includeBook,
+    ...includeAssociations,
   });
 };
 
 export const getById = async (id: string) => {
   return await Review.findOne({
     where: { id },
-    ...includeBook,
+    ...includeAssociations,
   });
 };
 
 export const getAllPublic = async () => {
   return await Review.findAll({
     where: { isPublic: true },
-    ...includeBook,
+    ...includeAssociations,
   });
 };
 
 export const getAllPrivate = async () => {
   return await Review.findAll({
     where: { isPublic: false },
-    ...includeBook,
+    ...includeAssociations,
   });
 };
 
 export const create = async (data: Omit<InferAttributes<Review>, "id">) => {
-  return Review.create(data).then((data) => data.dataValues);
+  const newReview = await Review.create(data);
+  const id = newReview.dataValues.id;
+  return Review.findOne({ where: { id }, ...includeAssociations });
 };
 
 export const update = async (
@@ -151,7 +166,7 @@ export const update = async (
   const review = await getById(id);
   await review?.update({ ...review, ...data });
 
-  return review;
+  return Review.findOne({ where: { id }, ...includeAssociations });
 };
 
 export const remove = async (id: string) => {
