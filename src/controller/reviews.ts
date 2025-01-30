@@ -52,7 +52,7 @@ export const updateReview = async (req: Request, res: Response) => {
       .status(404)
       .json({ message: `${id} id를 가진 리뷰가 존재하지 않습니다.` });
   }
-  res.status(201).json(review);
+  res.status(200).json(review);
 };
 
 export const removeReview = async (req: Request, res: Response) => {
