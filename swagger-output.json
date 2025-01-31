@@ -206,6 +206,9 @@
               }
             }
           },
+          "204": {
+            "description": "성공적으로 리뷰가 삭제됨."
+          },
           "400": {
             "description": "Bad Request"
           },
@@ -331,83 +334,86 @@
           "200": {
             "description": "리뷰 조회 성공",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "number",
-                  "example": 1
-                },
-                "userId": {
-                  "type": "number",
-                  "example": 10
-                },
-                "userNickname": {
-                  "type": "string",
-                  "example": "LiteraryLover"
-                },
-                "userProfileImage": {
-                  "type": "string",
-                  "example": "https://example.com/profiles/user10.jpg"
-                },
-                "readingStatus": {
-                  "type": "string",
-                  "example": "completed"
-                },
-                "startDate": {
-                  "type": "string",
-                  "example": "2023-02-15"
-                },
-                "endDate": {
-                  "type": "string",
-                  "example": "2023-03-01"
-                },
-                "rating": {
-                  "type": "number",
-                  "example": 9
-                },
-                "title": {
-                  "type": "string",
-                  "example": "1984"
-                },
-                "reviewDetail": {
-                  "type": "string",
-                  "example": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking."
-                },
-                "reviewOneline": {
-                  "type": "string",
-                  "example": "A must-read classic that warns of the dangers of unchecked power."
-                },
-                "isPublic": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "createdAt": {
-                  "type": "string",
-                  "example": "2023-03-01T12:00:00Z"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "example": "2023-03-05T15:30:00Z"
-                },
-                "bookId": {
-                  "type": "number",
-                  "example": 101
-                },
-                "bookTitle": {
-                  "type": "string",
-                  "example": "1984"
-                },
-                "bookAuthor": {
-                  "type": "string",
-                  "example": "George Orwell"
-                },
-                "bookPublisher": {
-                  "type": "string",
-                  "example": "Secker & Warburg"
-                },
-                "bookThumbnailImage": {
-                  "type": "string",
-                  "example": "https://example.com/1984.jpg"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "userId": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "userNickname": {
+                    "type": "string",
+                    "example": "LiteraryLover"
+                  },
+                  "userProfileImage": {
+                    "type": "string",
+                    "example": "https://example.com/profiles/user10.jpg"
+                  },
+                  "readingStatus": {
+                    "type": "string",
+                    "example": "completed"
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "example": "2023-02-15"
+                  },
+                  "endDate": {
+                    "type": "string",
+                    "example": "2023-03-01"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "example": 9
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "1984"
+                  },
+                  "reviewDetail": {
+                    "type": "string",
+                    "example": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking."
+                  },
+                  "reviewOneline": {
+                    "type": "string",
+                    "example": "A must-read classic that warns of the dangers of unchecked power."
+                  },
+                  "isPublic": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2023-03-01T12:00:00Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2023-03-05T15:30:00Z"
+                  },
+                  "bookId": {
+                    "type": "number",
+                    "example": 101
+                  },
+                  "bookTitle": {
+                    "type": "string",
+                    "example": "1984"
+                  },
+                  "bookAuthor": {
+                    "type": "string",
+                    "example": "George Orwell"
+                  },
+                  "bookPublisher": {
+                    "type": "string",
+                    "example": "Secker & Warburg"
+                  },
+                  "bookThumbnailImage": {
+                    "type": "string",
+                    "example": "https://example.com/1984.jpg"
+                  }
                 }
               },
               "xml": {
@@ -601,7 +607,9 @@
     },
     "/auth/signup": {
       "post": {
-        "description": "",
+        "tags": ["Auth"],
+        "summary": "회원가입",
+        "description": "회원가입",
         "parameters": [
           {
             "name": "body",
@@ -610,27 +618,62 @@
               "type": "object",
               "properties": {
                 "nickname": {
-                  "example": "any"
+                  "example": "user_nickname"
                 },
                 "loginId": {
-                  "example": "any"
+                  "example": "user_login_id"
                 },
                 "email": {
-                  "example": "any"
+                  "example": "user@example.com"
                 },
                 "password": {
-                  "example": "any"
+                  "example": "passwrod"
                 },
                 "profileImage": {
-                  "example": "any"
+                  "example": "null"
                 }
               }
             }
           }
         ],
         "responses": {
+          "200": {
+            "description": "로그인 확인 성공",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "생성된 토큰 값"
+                },
+                "loginId": {
+                  "type": "string",
+                  "example": "user4"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
           "201": {
-            "description": "Created"
+            "description": "회원가입 성공",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "생성된 토큰 값"
+                },
+                "loginId": {
+                  "type": "string",
+                  "example": "user4"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -646,7 +689,9 @@
     },
     "/auth/login": {
       "post": {
-        "description": "",
+        "tags": ["Auth"],
+        "summary": "로그인",
+        "description": "로그인",
         "parameters": [
           {
             "name": "body",
@@ -655,10 +700,10 @@
               "type": "object",
               "properties": {
                 "loginId": {
-                  "example": "any"
+                  "example": "user_login_id"
                 },
                 "password": {
-                  "example": "any"
+                  "example": "password"
                 }
               }
             }
@@ -666,7 +711,23 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "로그인 확인 성공",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "생성된 토큰 값"
+                },
+                "loginId": {
+                  "type": "string",
+                  "example": "user4"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -682,10 +743,28 @@
     },
     "/auth/me": {
       "get": {
-        "description": "",
+        "tags": ["Auth"],
+        "summary": "로그인 확인",
+        "description": "현재 로그인한 사용자의 정보를 반환합니다.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "로그인 확인 성공",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "생성된 토큰 값"
+                },
+                "loginId": {
+                  "type": "string",
+                  "example": "user4"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
