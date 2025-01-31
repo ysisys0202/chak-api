@@ -91,5 +91,5 @@ export const me = async (req: Request, res: Response) => {
     res.status(404).json({ message: "존재하지 않는 사용자입니다." });
     return;
   }
-  res.status(200).json({ token: req.token, username: user.loginId });
+  res.status(200).json({ token: req.token, loginId: user.loginId });
 };
