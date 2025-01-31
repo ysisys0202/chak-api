@@ -517,9 +517,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chackit@workspace:.":
+"chak-api@workspace:.":
   version: 0.0.0-use.local
-  resolution: "chackit@workspace:."
+  resolution: "chak-api@workspace:."
   dependencies:
     "@types/bcrypt": "npm:^5"
     "@types/cookie-parser": "npm:^1"
