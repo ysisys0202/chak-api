@@ -1,12 +1,12 @@
 import express from "express";
 import * as booksController from "../controller/books.js";
-
+import * as bookDoc from "../middleware/docs/books.js";
 const router = express.Router();
 
-router.get("/", booksController.getBooks);
+router.get("/", bookDoc.getBooks, booksController.getBooks);
 
-router.get("/:isbn", booksController.getBook);
+router.get("/:isbn", bookDoc.getBook, booksController.getBook);
 
-router.post("/", booksController.createBook);
+router.post("/", bookDoc.createBook, booksController.createBook);
 
 export default router;

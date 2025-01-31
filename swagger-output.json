@@ -561,7 +561,9 @@
     },
     "/books/": {
       "get": {
-        "description": "",
+        "tags": ["Books"],
+        "summary": "책 목록 조회",
+        "description": "책 목록을 조회합니다.",
         "parameters": [
           {
             "name": "title",
@@ -576,7 +578,9 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": ["Books"],
+        "summary": "책 데이터 생성",
+        "description": "책 데이터를 생성합니다.",
         "responses": {
           "201": {
             "description": "Created"
@@ -586,7 +590,9 @@
     },
     "/books/{isbn}": {
       "get": {
-        "description": "",
+        "tags": ["Books"],
+        "summary": "책 단일 데이터 조회",
+        "description": "경로 파라미터로 전달한 isbn을 가진 책을 조회합니다.",
         "parameters": [
           {
             "name": "isbn",
@@ -618,19 +624,19 @@
               "type": "object",
               "properties": {
                 "nickname": {
-                  "example": "user_nickname"
+                  "example": "any"
                 },
                 "loginId": {
-                  "example": "user_login_id"
+                  "example": "any"
                 },
                 "email": {
-                  "example": "user@example.com"
+                  "example": "any"
                 },
                 "password": {
-                  "example": "passwrod"
+                  "example": "any"
                 },
                 "profileImage": {
-                  "example": "null"
+                  "example": "any"
                 }
               }
             }
@@ -700,10 +706,10 @@
               "type": "object",
               "properties": {
                 "loginId": {
-                  "example": "user_login_id"
+                  "example": "any"
                 },
                 "password": {
-                  "example": "password"
+                  "example": "any"
                 }
               }
             }
