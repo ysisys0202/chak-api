@@ -11,8 +11,6 @@ import { env } from "./utils/envConfig.js";
 import swaggerUI from "swagger-ui-express";
 import swaggerDocument from "../swagger-output.json" assert { type: "json" };
 
-console.log("swagger");
-
 const app = express();
 
 const corsOption = {
