@@ -16,7 +16,7 @@ const app = express();
 const corsOption = {
   origin: env.cors.allowedOrigin,
   optionSuccessStatus: 200,
-  Credential: true,
+  credentials: true,
 };
 
 app.use(express.json());
