@@ -4,6 +4,22 @@ import jwt from "jsonwebtoken";
 import * as UserRepository from "../data/users.js";
 import { env } from "../utils/envConfig.js";
 
+const setToken = (res: Response, token: string) => {
+  const options = {
+    maxAge: Number(env.jwt.expiredSec) * 1000,
+    httpOnly: true,
+    samesSite: "none",
+    secure: true,
+  };
+  res.cookie("token", token, options);
+};
+
+export const createJwtToken = (id: number) => {
+  return jwt.sign({ id }, env.jwt.secretKey, {
+    expiresIn: env.jwt.expiredSec,
+  });
+};
+
 export const signup = async (req: Request, res: Response) => {
   const { nickname, loginId, email, password, profileImage } = req.body;
   const isNameDuplicate = await UserRepository.findUser("loginId", loginId);
@@ -69,20 +85,9 @@ export const login = async (req: Request, res: Response) => {
   res.status(200).json({ loginId });
 };
 
-const setToken = (res: Response, token: string) => {
-  const options = {
-    maxAge: Number(env.jwt.expiredSec) * 1000,
-    httpOnly: true,
-    samesSite: "none",
-    secure: true,
-  };
-  res.cookie("token", token, options);
-};
-
-export const createJwtToken = (id: number) => {
-  return jwt.sign({ id }, env.jwt.secretKey, {
-    expiresIn: env.jwt.expiredSec,
-  });
+export const logout = async (req: Request, res: Response) => {
+  res.cookie("token", "");
+  res.status(200).json({ message: "로그아웃되었습니다." });
 };
 
 export const me = async (req: Request, res: Response) => {
