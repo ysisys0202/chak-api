@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import * as booksRepository from "../data/books.js";
 import { generateNotFoundMessage } from "../utils/message.js";
 import { env } from "../utils/envConfig.js";
+import { generateQueryString } from "../utils/url.js";
 
 export const getBooks = async (req: Request, res: Response) => {
   const { title } = req.query;
@@ -29,17 +30,25 @@ export const createBook = async (req: Request, res: Response) => {
 };
 
 export const searchBooks = async (req: Request, res: Response) => {
-  const { query } = req.query;
+  const { query, display = 10, start = 1, sort, filter, exdude } = req.query;
 
   if (!query) {
     res.status(400).json({ message: "검색어를 입력해주세요." });
     return;
   }
-  const encodedQuery = encodeURIComponent(query as string);
+
+  const queyString = generateQueryString({
+    query: query as string,
+    display: display as number,
+    start: start as number,
+    sort: sort as string,
+    filter: filter as string,
+    exdude: exdude as string,
+  });
 
   try {
     const response = await fetch(
-      `https://openapi.naver.com/v1/search/book.json?query=${encodedQuery}`,
+      `https://openapi.naver.com/v1/search/book.json?${queyString}`,
       {
         method: "GET",
         headers: {
