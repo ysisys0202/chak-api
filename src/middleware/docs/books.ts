@@ -29,4 +29,5 @@ export const createBook = (req: Request, res: Response, next: NextFunction) => {
       #swagger.description = "책 데이터를 생성합니다."
       } 
   */
+  next();
 };

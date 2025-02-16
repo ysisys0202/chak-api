@@ -46,6 +46,7 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
         },
       } 
       */
+  next();
 };
 
 export const me = (req: Request, res: Response, next: NextFunction) => {
@@ -68,4 +69,5 @@ export const me = (req: Request, res: Response, next: NextFunction) => {
         },
       } 
       */
+  next();
 };
