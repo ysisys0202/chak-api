@@ -25,4 +25,8 @@ export const env = {
   cors: {
     allowedOrigin: getEnv("CORS_ALLOWED_ORIGIN"),
   },
+  naver: {
+    clinetId: getEnv("NAVER_CLIENT_ID"),
+    clientSecret: getEnv("NAVER_CLIENT_SECRET"),
+  },
 };

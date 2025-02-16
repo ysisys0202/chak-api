@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.get("/", bookDoc.getBooks, booksController.getBooks);
 
+router.get("/search", booksController.searchBooks);
+
 router.get("/:isbn", bookDoc.getBook, booksController.getBook);
 
 router.post("/", bookDoc.createBook, booksController.createBook);
