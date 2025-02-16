@@ -42,7 +42,7 @@ export const signup = async (req: Request, res: Response) => {
 
   const token = createJwtToken(userId);
   setToken(res, token);
-  res.status(201).json({ token, loginId });
+  res.status(201).json({ loginId });
 };
 
 export const login = async (req: Request, res: Response) => {
@@ -66,7 +66,7 @@ export const login = async (req: Request, res: Response) => {
   }
   const token = createJwtToken(user.id);
   setToken(res, token);
-  res.status(200).json({ token, loginId });
+  res.status(200).json({ loginId });
 };
 
 const setToken = (res: Response, token: string) => {
@@ -91,5 +91,6 @@ export const me = async (req: Request, res: Response) => {
     res.status(404).json({ message: "존재하지 않는 사용자입니다." });
     return;
   }
-  res.status(200).json({ token: req.token, loginId: user.loginId });
+  const { loginId, nickname } = user;
+  res.status(200).json({ loginId, nickname });
 };
