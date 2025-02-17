@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as booksRepository from "../data/books.js";
+import * as BooksRepository from "../data/books.js";
 import { generateNotFoundMessage } from "../utils/message.js";
 import { env } from "../utils/envConfig.js";
 import { generateQueryString } from "../utils/url.js";
@@ -7,25 +7,32 @@ import { generateQueryString } from "../utils/url.js";
 export const getBooks = async (req: Request, res: Response) => {
   const { title } = req.query;
   const books = await (title
-    ? booksRepository.getAllByTitle(title as string)
-    : booksRepository.getAll());
+    ? BooksRepository.getAllByTitle(title as string)
+    : BooksRepository.getAll());
   res.status(200).json(books);
 };
 
 export const getBook = async (req: Request, res: Response) => {
   const { isbn } = req.params;
-  const book = await booksRepository.getByIsbn(isbn);
+  const book = await BooksRepository.getByIsbn(isbn);
+
   if (!book) {
     res
       .status(404)
       .json({ message: generateNotFoundMessage("책", "isbn", isbn) });
+    return;
   }
   res.status(200).json(book);
 };
 
 export const createBook = async (req: Request, res: Response) => {
   const book = req.body;
-  await booksRepository.createBook(book);
+  const isDuplicate = await BooksRepository.getByIsbn(book.isbn);
+  if (isDuplicate) {
+    res.status(409).json({ message: `이미 등록된 책 입니다.` });
+    return;
+  }
+  await BooksRepository.createBook(book);
   res.status(201).json(book);
 };
 
@@ -65,7 +72,7 @@ export const searchBooks = async (req: Request, res: Response) => {
 
     const data = await response.json();
 
-    res.status(200).json({ data });
+    res.status(200).json({ ...data });
   } catch (error) {
     console.error("Error searching books:", error);
     res.status(500).json({ message: "서버 오류가 발생했습니다." });

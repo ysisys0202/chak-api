@@ -16,8 +16,11 @@ export class Book extends Model<
   declare author: string;
   declare publisher: string;
   declare isbn: string;
-  declare pubdate: Date;
-  declare thumbnailImage: CreationOptional<string>;
+  declare pubdate: string;
+  declare image: CreationOptional<string>;
+  declare description: string;
+  declare discount: string;
+  declare link: string;
 }
 
 Book.init(
@@ -45,10 +48,13 @@ Book.init(
       allowNull: false,
     },
     pubdate: {
-      type: DataTypes.DATE,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
-    thumbnailImage: DataTypes.TEXT,
+    image: DataTypes.TEXT,
+    description: DataTypes.TEXT,
+    discount: DataTypes.TEXT,
+    link: DataTypes.TEXT,
   },
   {
     sequelize,
