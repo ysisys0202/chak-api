@@ -6,7 +6,7 @@ import { env } from "../utils/envConfig.js";
 
 const setToken = (res: Response, token: string) => {
   const options = {
-    maxAge: Number(env.jwt.expiredSec) * 1000,
+    maxAge: Number(env.jwt.expiredSec) * 100000,
     httpOnly: true,
     samesSite: "none",
     secure: true,
@@ -96,6 +96,6 @@ export const me = async (req: Request, res: Response) => {
     res.status(404).json({ message: "존재하지 않는 사용자입니다." });
     return;
   }
-  const { loginId, nickname } = user;
-  res.status(200).json({ loginId, nickname });
+  const { loginId, nickname, id } = user;
+  res.status(200).json({ loginId, nickname, id });
 };

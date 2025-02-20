@@ -1,14 +1,19 @@
 import { z } from "zod";
 
 const ReadingStateSchema = z.union(
-  [z.literal("reading"), z.literal("paused"), z.literal("done")],
+  [
+    z.literal("pre-reading"),
+    z.literal("reading"),
+    z.literal("stop"),
+    z.literal("done"),
+  ],
   {
     invalid_type_error:
-      "독서 상태는 'reading', 'paused', 'done' 중 하나로 입력해주세요.",
+      "독서 상태는 'pre-reading', 'reading', 'paused', 'done' 중 하나로 입력해주세요.",
   }
 );
 
-export const ReviewSchema = z.object({
+export const RecordSchema = z.object({
   userId: z.number(),
   bookId: z.number({
     required_error: "책 정보를 입력해주세요.",
@@ -31,12 +36,6 @@ export const ReviewSchema = z.object({
     .trim()
     .min(1, { message: "제목은 최소 1자 이상이어야 해요." })
     .max(60, { message: "제목은 최대 60자까지만 입력할 수 있어요." }),
-  reviewDetail: z.string().optional(),
-  reviewOneline: z
-    .string()
-    .max(255, {
-      message: "한줄평은 최대 255자까지만 입력할 수 있어요.",
-    })
-    .optional(),
+  recordDetail: z.string().optional(),
   isPublic: z.boolean(),
 });

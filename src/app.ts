@@ -4,7 +4,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { sequelize } from "./db/database.js";
-import ReviewsRouter from "./router/reviews.js";
+import RecordsRouter from "./router/records.js";
 import BooksRouter from "./router/books.js";
 import AuthRouter from "./router/auth.js";
 import { env } from "./utils/envConfig.js";
@@ -25,10 +25,9 @@ app.use(helmet());
 app.use(cors(corsOption));
 app.use(morgan("tiny"));
 
-app.use("/reviews", ReviewsRouter);
+app.use("/records", RecordsRouter);
 app.use("/books", BooksRouter);
 app.use("/auth", AuthRouter);
-
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use((req: Request, res: Response, next: NextFunction) => {

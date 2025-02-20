@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 
-export const getReviews = (req: Request, res: Response, next: NextFunction) => {
+export const getRecords = (req: Request, res: Response, next: NextFunction) => {
   /* 
 
-    #swagger.tags = ['Reviews']
+    #swagger.tags = ['Record']
     #swagger.summary = '리뷰 목록 조회'
     #swagger.description = '리뷰 목록을 조회합니다. userId 쿼리 파라미터를 전달하여 특정 유저가 작성한 리뷰 목록을 조회할 수도 있습니다.'
     #swagger.parameters['userId'] = {
@@ -26,8 +26,7 @@ export const getReviews = (req: Request, res: Response, next: NextFunction) => {
                   "endDate": "2023-03-01", 
                   "rating": 9,
                   "title": "1984",
-                  "reviewDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
-                  "reviewOneline": "A must-read classic that warns of the dangers of unchecked power.",
+                  "recordDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
                   "isPublic": true,
                   "createdAt": "2023-03-01T12:00:00Z",
                   "updatedAt": "2023-03-05T15:30:00Z",
@@ -45,14 +44,14 @@ export const getReviews = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export const getPublicReviews = (
+export const getPublicRecords = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   /* 
   
-      #swagger.tags = ['Reviews']
+      #swagger.tags = ['Record']
       #swagger.summary = '공개 리뷰 목록 조회'
       #swagger.description = '공개 상태인 리뷰 목록을 조회합니다. userId 쿼리 파라미터를 전달하여 특정 유저가 작성한 리뷰 목록을 조회할 수도 있습니다.'
       #swagger.parameters['userId'] = {
@@ -75,8 +74,8 @@ export const getPublicReviews = (
                     "endDate": "2023-03-01", 
                     "rating": 9,
                     "title": "1984",
-                    "reviewDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
-                    "reviewOneline": "A must-read classic that warns of the dangers of unchecked power.",
+                    "recordDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
+                    "recordOneline": "A must-read classic that warns of the dangers of unchecked power.",
                     "isPublic": true,
                     "createdAt": "2023-03-01T12:00:00Z",
                     "updatedAt": "2023-03-05T15:30:00Z",
@@ -93,14 +92,14 @@ export const getPublicReviews = (
   next();
 };
 
-export const getReview = (req: Request, res: Response, next: NextFunction) => {
+export const getRecord = (req: Request, res: Response, next: NextFunction) => {
   /* 
-      #swagger.tags = ['Reviews']
+      #swagger.tags = ['Record']
       #swagger.summary = '단일 리뷰 조회'
       #swagger.description = '단일 리뷰를 조회합니다.'
       #swagger.parameters['body'] = {
         in: 'body',
-        description: '경로 파라미터로 전달받은 review id를 가진 리뷰를 조회합니다.', 
+        description: '경로 파라미터로 전달받은 record id를 가진 리뷰를 조회합니다.', 
       }                  
       #swagger.responses[200] = {
         description: '리뷰 조회 성공',
@@ -114,8 +113,8 @@ export const getReview = (req: Request, res: Response, next: NextFunction) => {
               "endDate": "2023-03-01",
               "rating": 9,
               "title": "1984",
-              "reviewDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
-              "reviewOneline": "A must-read classic that warns of the dangers of unchecked power.",
+              "recordDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
+              "recordOneline": "A must-read classic that warns of the dangers of unchecked power.",
               "isPublic": true,
               "createdAt": "2023-03-01T12:00:00Z",
               "updatedAt": "2023-03-05T15:30:00Z",
@@ -131,13 +130,13 @@ export const getReview = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export const createReview = (
+export const createRecord = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   /* 
-      #swagger.tags = ['Reviews']
+      #swagger.tags = ['Record']
       #swagger.summary = '리뷰 생성'
       #swagger.description = '리뷰를 생성합니다.'
       #swagger.parameters['body'] = {
@@ -150,8 +149,8 @@ export const createReview = (
                 "endDate": "2023-03-01",
                 "rating": 9,
                 "title": "1984",
-                "reviewDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
-                "reviewOneline": "A must-read classic that warns of the dangers of unchecked power.",
+                "recordDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
+                "recordOneline": "A must-read classic that warns of the dangers of unchecked power.",
                 "isPublic": true,
                 "bookId": 101,
            }
@@ -167,8 +166,8 @@ export const createReview = (
               "endDate": "2023-03-01",
               "rating": 9,
               "title": "1984",
-              "reviewDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
-              "reviewOneline": "A must-read classic that warns of the dangers of unchecked power.",
+              "recordDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
+              "recordOneline": "A must-read classic that warns of the dangers of unchecked power.",
               "isPublic": true,
               "createdAt": "2023-03-01T12:00:00Z",
               "updatedAt": "2023-03-05T15:30:00Z",
@@ -184,14 +183,14 @@ export const createReview = (
   next();
 };
 
-export const updateReview = (
+export const updateRecord = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   /* 
     
-        #swagger.tags = ['Reviews']
+        #swagger.tags = ['Record']
         #swagger.summary = '리뷰 수정'
         #swagger.description = '경로 파라미터로 전달된 id를 가진 리뷰를 수정합니다.'
         #swagger.parameters['body'] = {
@@ -203,8 +202,8 @@ export const updateReview = (
                   "endDate": "2023-03-01",
                   "rating": 9,
                   "title": "1984",
-                  "reviewDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
-                  "reviewOneline": "A must-read classic that warns of the dangers of unchecked power.",
+                  "recordDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
+                  "recordOneline": "A must-read classic that warns of the dangers of unchecked power.",
                   "isPublic": true,
              }
         #swagger.responses[200] = {
@@ -219,8 +218,8 @@ export const updateReview = (
                 "endDate": "2023-03-01",
                 "rating": 9,
                 "title": "1984",
-                "reviewDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
-                "reviewOneline": "A must-read classic that warns of the dangers of unchecked power.",
+                "recordDetail": "A chilling dystopian novel that remains relevant today. Orwell's vision of a totalitarian future is both terrifying and thought-provoking.",
+                "recordOneline": "A must-read classic that warns of the dangers of unchecked power.",
                 "isPublic": true,
                 "createdAt": "2023-03-01T12:00:00Z",
                 "updatedAt": "2023-03-05T15:30:00Z",
@@ -236,14 +235,14 @@ export const updateReview = (
   next();
 };
 
-export const removeReview = (
+export const removeRecord = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   /* 
   
-      #swagger.tags = ['Reviews']
+      #swagger.tags = ['Record']
       #swagger.summary = '리뷰 삭제'
       #swagger.description = '경로 파라미터로 전달받은 id를 가진 리뷰를 삭제합니다.'                   
       #swagger.responses[204] = {

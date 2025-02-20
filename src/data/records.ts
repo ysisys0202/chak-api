@@ -12,9 +12,9 @@ import SQ, {
 import { Book } from "./books.js";
 
 const Sequelize = SQ.Sequelize;
-class Review extends Model<
-  InferAttributes<Review>,
-  InferCreationAttributes<Review>
+class Record extends Model<
+  InferAttributes<Record>,
+  InferCreationAttributes<Record>
 > {
   declare id: CreationOptional<number>;
   declare userId: number;
@@ -24,12 +24,11 @@ class Review extends Model<
   declare endDate: Date;
   declare rating: number;
   declare title: string;
-  declare reviewDetail: string;
-  declare reviewOneline: string;
+  declare recordDetail: string;
   declare isPublic: boolean;
 }
 
-Review.init(
+Record.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -63,10 +62,7 @@ Review.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    reviewDetail: {
-      type: DataTypes.STRING,
-    },
-    reviewOneline: {
+    recordDetail: {
       type: DataTypes.STRING,
     },
     isPublic: {
@@ -76,16 +72,16 @@ Review.init(
   },
   {
     sequelize,
-    tableName: "reviews",
+    tableName: "Records",
     timestamps: true,
   }
 );
 
-Review.belongsTo(User, { foreignKey: "userId" });
-Review.belongsTo(Book, { foreignKey: "bookId" });
+Record.belongsTo(User, { foreignKey: "userId" });
+Record.belongsTo(Book, { foreignKey: "bookId" });
 
 const includeAssociations: FindOptions<
-  InferAttributes<Review, { omit: never }>
+  InferAttributes<Record, { omit: never }>
 > = {
   attributes: [
     "id",
@@ -95,8 +91,7 @@ const includeAssociations: FindOptions<
     "endDate",
     "rating",
     "title",
-    "reviewDetail",
-    "reviewOneline",
+    "recordDetail",
     "isPublic",
     "createdAt",
     "updatedAt",
@@ -122,54 +117,54 @@ const includeAssociations: FindOptions<
 };
 
 export const getAll = async () => {
-  return await Review.findAll(includeAssociations);
+  return await Record.findAll(includeAssociations);
 };
 
 export const getAllByUserId = async (userId: string) => {
-  return await Review.findAll({
+  return await Record.findAll({
     where: { userId },
     ...includeAssociations,
   });
 };
 
 export const getById = async (id: string) => {
-  return await Review.findOne({
+  return await Record.findOne({
     where: { id },
     ...includeAssociations,
   });
 };
 
 export const getAllPublic = async () => {
-  return await Review.findAll({
+  return await Record.findAll({
     where: { isPublic: true },
     ...includeAssociations,
   });
 };
 
 export const getAllPrivate = async () => {
-  return await Review.findAll({
+  return await Record.findAll({
     where: { isPublic: false },
     ...includeAssociations,
   });
 };
 
-export const create = async (data: Omit<InferAttributes<Review>, "id">) => {
-  const newReview = await Review.create(data);
-  const id = newReview.dataValues.id;
-  return Review.findOne({ where: { id }, ...includeAssociations });
+export const create = async (data: Omit<InferAttributes<Record>, "id">) => {
+  const newRecord = await Record.create(data);
+  const id = newRecord.dataValues.id;
+  return Record.findOne({ where: { id }, ...includeAssociations });
 };
 
 export const update = async (
   id: string,
-  data: Omit<InferAttributes<Review>, "id">
+  data: Omit<InferAttributes<Record>, "id">
 ) => {
-  const review = await getById(id);
-  await review?.update({ ...review, ...data });
+  const RecordId = await getById(id);
+  await RecordId?.update({ ...Record, ...data });
 
-  return Review.findOne({ where: { id }, ...includeAssociations });
+  return Record.findOne({ where: { id }, ...includeAssociations });
 };
 
 export const remove = async (id: string) => {
-  const review = await getById(id);
-  await review?.destroy();
+  const RecordId = await getById(id);
+  await RecordId?.destroy();
 };
