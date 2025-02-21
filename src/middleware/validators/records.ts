@@ -18,7 +18,7 @@ export const RecordSchema = z.object({
   bookId: z.number({
     required_error: "책 정보를 입력해주세요.",
   }),
-  readingStatus: ReadingStateSchema,
+  readingState: ReadingStateSchema,
   startDate: z.date().optional(),
   endDate: z.date().optional(),
   rating: z

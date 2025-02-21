@@ -52,6 +52,7 @@ export const updateRecord = async (req: Request, res: Response) => {
     res
       .status(404)
       .json({ message: `${id} id를 가진 리뷰가 존재하지 않습니다.` });
+    return;
   }
   res.status(200).json(record);
 };

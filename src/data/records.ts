@@ -19,7 +19,7 @@ class Record extends Model<
   declare id: CreationOptional<number>;
   declare userId: number;
   declare bookId: number;
-  declare readingStatus: string;
+  declare readingState: string;
   declare startDate: Date;
   declare endDate: Date;
   declare rating: number;
@@ -44,7 +44,7 @@ Record.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    readingStatus: {
+    readingState: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -72,7 +72,7 @@ Record.init(
   },
   {
     sequelize,
-    tableName: "Records",
+    tableName: "records",
     timestamps: true,
   }
 );
@@ -86,7 +86,7 @@ const includeAssociations: FindOptions<
   attributes: [
     "id",
     "userId",
-    "readingStatus",
+    "readingState",
     "startDate",
     "endDate",
     "rating",
@@ -102,7 +102,7 @@ const includeAssociations: FindOptions<
     [Sequelize.col("Book.title"), "bookTitle"],
     [Sequelize.col("Book.author"), "bookAuthor"],
     [Sequelize.col("Book.publisher"), "bookPublisher"],
-    [Sequelize.col("Book.thumbnailImage"), "bookThumbnailImage"],
+    [Sequelize.col("Book.image"), "bookImage"],
   ],
   include: [
     {
