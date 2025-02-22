@@ -6,10 +6,12 @@ export const getRecords = async (
   res: Response
 ): Promise<void> => {
   const userId = req.query.userId as string;
+  const start =
+    req.query.start !== undefined ? Number(req.query.start) : undefined;
+  const display =
+    req.query.display !== undefined ? Number(req.query.display) : undefined;
 
-  const records = await (userId
-    ? RecordsRepository.getAllByUserId(userId)
-    : RecordsRepository.getAll());
+  const records = await RecordsRepository.getAll({ userId, start, display });
 
   res.status(200).json(records);
 };
@@ -31,6 +33,7 @@ export const getRecord = async (req: Request, res: Response): Promise<void> => {
     res
       .status(404)
       .json({ message: `${id} id를 가진 record가 존재하지 않습니다.` });
+    return;
   }
 
   if (record?.userId !== req.userId) {

@@ -116,13 +116,17 @@ const includeAssociations: FindOptions<
   ],
 };
 
-export const getAll = async () => {
-  return await Record.findAll(includeAssociations);
+type GetAllOptions = {
+  userId?: string;
+  start?: number;
+  display?: number;
 };
 
-export const getAllByUserId = async (userId: string) => {
+export const getAll = async (options?: GetAllOptions) => {
   return await Record.findAll({
-    where: { userId },
+    offset: options?.start,
+    limit: options?.display,
+    where: { userId: options?.userId },
     ...includeAssociations,
   });
 };
