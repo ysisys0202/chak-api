@@ -103,6 +103,8 @@ const includeAssociations: FindOptions<
     [Sequelize.col("Book.author"), "bookAuthor"],
     [Sequelize.col("Book.publisher"), "bookPublisher"],
     [Sequelize.col("Book.image"), "bookImage"],
+    [Sequelize.col("Book.isbn"), "bookIsbn"],
+    [Sequelize.col("Book.pubdate"), "bookPubdate"],
   ],
   include: [
     {
