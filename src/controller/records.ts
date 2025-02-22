@@ -33,6 +33,11 @@ export const getRecord = async (req: Request, res: Response): Promise<void> => {
       .json({ message: `${id} id를 가진 record가 존재하지 않습니다.` });
   }
 
+  if (record?.userId !== req.userId) {
+    res.status(403).json({ message: "해당 페이지에 접근 권한이 없습니다." });
+    return;
+  }
+
   res.status(200).json(record);
 };
 
@@ -54,6 +59,12 @@ export const updateRecord = async (req: Request, res: Response) => {
       .json({ message: `${id} id를 가진 리뷰가 존재하지 않습니다.` });
     return;
   }
+
+  if (record?.userId !== req.userId) {
+    res.status(403).json({ message: "기록 수정 권한이 없습니다." });
+    return;
+  }
+
   res.status(200).json(record);
 };
 
