@@ -96,6 +96,6 @@ export const me = async (req: Request, res: Response) => {
     res.status(404).json({ message: "존재하지 않는 사용자입니다." });
     return;
   }
-  const { loginId, nickname, id } = user;
-  res.status(200).json({ loginId, nickname, id });
+  const { loginId, nickname, id, profileImage } = user;
+  res.status(200).json({ loginId, nickname, id, profileImage });
 };
