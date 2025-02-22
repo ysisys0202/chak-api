@@ -27,13 +27,13 @@ export const getBook = async (req: Request, res: Response) => {
 
 export const createBook = async (req: Request, res: Response) => {
   const book = req.body;
-  const isDuplicate = await BooksRepository.getByIsbn(book.isbn);
-  if (isDuplicate) {
-    res.status(409).json({ message: `이미 등록된 책 입니다.` });
+  const existingBook = await BooksRepository.getByIsbn(book.isbn);
+  if (existingBook) {
+    res.status(200).json(book);
     return;
   }
-  await BooksRepository.createBook(book);
-  res.status(201).json(book);
+  const newBook = await BooksRepository.createBook(book);
+  res.status(201).json(newBook);
 };
 
 export const searchBooks = async (req: Request, res: Response) => {
