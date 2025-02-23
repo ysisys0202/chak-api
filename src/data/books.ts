@@ -16,7 +16,7 @@ export class Book extends Model<
   declare author: string;
   declare publisher: string;
   declare isbn: string;
-  declare pubdate: string;
+  declare pubdate: Date;
   declare image: CreationOptional<string>;
   declare description: string;
   declare discount: string;
@@ -48,7 +48,7 @@ Book.init(
       allowNull: false,
     },
     pubdate: {
-      type: DataTypes.TEXT,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     image: DataTypes.TEXT,

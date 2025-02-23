@@ -3,6 +3,7 @@ import * as BooksRepository from "../data/books.js";
 import { generateNotFoundMessage } from "../utils/message.js";
 import { env } from "../utils/envConfig.js";
 import { generateQueryString } from "../utils/url.js";
+import { formatDate } from "../utils/date.js";
 
 export const getBooks = async (req: Request, res: Response) => {
   const { title } = req.query;
@@ -27,11 +28,16 @@ export const getBook = async (req: Request, res: Response) => {
 
 export const createBook = async (req: Request, res: Response) => {
   const book = req.body;
+
+  book.pubdate = formatDate(book.pubdate);
+
   const existingBook = await BooksRepository.getByIsbn(book.isbn);
+
   if (existingBook) {
-    res.status(200).json(book);
+    res.status(200).json(existingBook);
     return;
   }
+
   const newBook = await BooksRepository.createBook(book);
   res.status(201).json(newBook);
 };
