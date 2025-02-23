@@ -6,24 +6,17 @@ export const getRecords = async (
   res: Response
 ): Promise<void> => {
   const userId = req.query.userId as string;
-  const start =
-    req.query.start !== undefined ? Number(req.query.start) : undefined;
-  const display =
-    req.query.display !== undefined ? Number(req.query.display) : undefined;
+  const start = req.query.start ? Number(req.query.start) : 0;
+  const display = req.query.display ? Number(req.query.display) : 10;
+  const items = await RecordsRepository.getAll({ userId, start, display });
+  const total = await RecordsRepository.getTotalCount({ userId });
 
-  const records = await RecordsRepository.getAll({ userId, start, display });
-
-  res.status(200).json(records);
-};
-
-export const getPublicRecords = async (
-  req: Request,
-
-  res: Response
-): Promise<void> => {
-  const records = await RecordsRepository.getAllPublic();
-
-  res.status(200).json(records);
+  res.status(200).json({
+    items,
+    display,
+    total,
+    start,
+  });
 };
 
 export const getRecord = async (req: Request, res: Response): Promise<void> => {

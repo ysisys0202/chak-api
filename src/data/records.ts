@@ -133,6 +133,12 @@ export const getAll = async (options?: GetAllOptions) => {
   });
 };
 
+export const getTotalCount = async ({ userId }: { userId: string }) => {
+  return await Record.count({
+    where: { userId },
+  });
+};
+
 export const getById = async (id: string) => {
   return await Record.findOne({
     where: { id },

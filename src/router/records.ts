@@ -9,12 +9,6 @@ const router = express.Router();
 
 router.get("/", isAuth, recordDocs.getRecords, recordsController.getRecords);
 
-router.get(
-  "/public",
-  recordsController.getPublicRecords,
-  recordDocs.getPublicRecords
-);
-
 router.get("/:id", isAuth, recordDocs.getRecord, recordsController.getRecord);
 
 router.post(
