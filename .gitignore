@@ -1,6 +1,5 @@
 # Yarn 4 PnP 의존성 관련 파일
-.pnp.*
-.pnp.js
+.pnp.loader.mjs
 .yarn/*
 !.yarn/releases
 !.yarn/plugins
