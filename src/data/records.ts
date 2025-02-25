@@ -118,24 +118,48 @@ const includeAssociations: FindOptions<
   ],
 };
 
+type ReadingState = "pre-reading" | "reading" | "stop" | "done";
 type GetAllOptions = {
   userId?: string;
   start?: number;
   display?: number;
+  readingState?: ReadingState;
 };
 
 export const getAll = async (options?: GetAllOptions) => {
+  const where: GetAllOptions = {};
+  if (options?.userId) {
+    where.userId = options.userId;
+  }
+  if (options?.readingState) {
+    where.readingState = options.readingState;
+  }
+
   return await Record.findAll({
     offset: options?.start,
     limit: options?.display,
-    where: { userId: options?.userId },
+    where,
+    order: [["createdAt", "ASC"]],
     ...includeAssociations,
   });
 };
 
-export const getTotalCount = async ({ userId }: { userId: string }) => {
+export const getTotalCount = async ({
+  userId,
+  readingState,
+}: {
+  userId: string;
+  readingState?: ReadingState;
+}) => {
+  const where: GetAllOptions = {};
+  if (userId) {
+    where.userId = userId;
+  }
+  if (readingState) {
+    where.readingState = readingState;
+  }
   return await Record.count({
-    where: { userId },
+    where: where,
   });
 };
 
