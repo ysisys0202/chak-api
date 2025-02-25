@@ -9,7 +9,7 @@ import BooksRouter from "./router/books.js";
 import AuthRouter from "./router/auth.js";
 import { env } from "./utils/envConfig.js";
 import swaggerUI from "swagger-ui-express";
-import swaggerDocument from "../swagger-output.json" assert { type: "json" };
+import swaggerDocument from "../swagger-output.json" with { type: "json" };
 
 const app = express();
 
