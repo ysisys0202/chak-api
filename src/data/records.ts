@@ -118,7 +118,7 @@ const includeAssociations: FindOptions<
   ],
 };
 
-type ReadingState = "pre-reading" | "reading" | "stop" | "done";
+export type ReadingState = "pre-reading" | "reading" | "stop" | "done";
 type GetAllOptions = {
   userId?: string;
   start?: number;
