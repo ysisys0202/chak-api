@@ -139,7 +139,7 @@ export const getAll = async (options?: GetAllOptions) => {
     offset: options?.start,
     limit: options?.display,
     where,
-    order: [["createdAt", "ASC"]],
+    order: [["createdAt", "DESC"]],
     ...includeAssociations,
   });
 };
