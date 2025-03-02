@@ -10,6 +10,7 @@ export const setToken = (res: Response, token: string) => {
     httpOnly: true,
     sameSite: "none" as "none",
     secure: true,
+    domain: env.client.host,
   };
   res.cookie("token", token, options);
 };

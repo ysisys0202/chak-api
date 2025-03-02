@@ -14,7 +14,7 @@ import swaggerDocument from "../swagger-output.json" with { type: "json" };
 const app = express();
 
 const corsOption = {
-  origin: env.cors.allowedOrigin,
+  origin: env.client.host,
   optionSuccessStatus: 200,
   credentials: true,
 };

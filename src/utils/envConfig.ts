@@ -22,8 +22,8 @@ export const env = {
     password: getEnv("DB_PASSWORD"),
     port: getEnv("DB_PORT"),
   },
-  cors: {
-    allowedOrigin: getEnv("CORS_ALLOWED_ORIGIN"),
+  client: {
+    host: getEnv("CLIENT_HOST"),
   },
   naver: {
     clinetId: getEnv("NAVER_CLIENT_ID"),
