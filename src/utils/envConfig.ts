@@ -25,6 +25,9 @@ export const env = {
   client: {
     host: getEnv("CLIENT_HOST"),
   },
+  cookie: {
+    domain: getEnv("COOKIE_DOMAIN"),
+  },
   naver: {
     clinetId: getEnv("NAVER_CLIENT_ID"),
     clientSecret: getEnv("NAVER_CLIENT_SECRET"),
