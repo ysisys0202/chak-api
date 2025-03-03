@@ -4,16 +4,6 @@ import jwt from "jsonwebtoken";
 import * as UserRepository from "../data/users.js";
 import { env } from "../utils/envConfig.js";
 
-export const setToken = (res: Response, token: string) => {
-  const options = {
-    maxAge: Number(env.jwt.expiredSec) * 1000,
-    httpOnly: true,
-    sameSite: "none" as "none",
-    secure: true,
-  };
-  res.cookie("token", token, options);
-};
-
 export const createJwtToken = (id: number) => {
   return jwt.sign({ id }, env.jwt.secretKey, {
     expiresIn: Number(env.jwt.expiredSec),
@@ -57,8 +47,7 @@ export const signup = async (req: Request, res: Response) => {
   });
 
   const token = createJwtToken(userId);
-  setToken(res, token);
-  res.status(201).json({ loginId });
+  res.status(201).json({ loginId, token });
 };
 
 export const login = async (req: Request, res: Response) => {
@@ -81,8 +70,7 @@ export const login = async (req: Request, res: Response) => {
     return;
   }
   const token = createJwtToken(user.id);
-  setToken(res, token);
-  res.status(200).json({ loginId });
+  res.status(200).json({ loginId, token });
 };
 
 export const logout = async (req: Request, res: Response) => {
