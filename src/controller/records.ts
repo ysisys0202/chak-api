@@ -8,6 +8,12 @@ export const getRecords = async (
 ): Promise<void> => {
   const userId = req.query.userId as string;
   const start = req.query.start ? Number(req.query.start) : 0;
+  if (start < 0) {
+    res.status(400).json({
+      message: "start 값은 0 이상의 값입니다.",
+    });
+    return;
+  }
   const display = req.query.display ? Number(req.query.display) : 10;
   const readingState = req.query.readingState as ReadingState;
   const items = await RecordsRepository.getAll({
@@ -56,6 +62,7 @@ export const getRecordCountByReadingState = async (
       .json({ message: `${id}를 가진 사용자는 존재하지 않습니다.` });
     return;
   }
+  console.log(id);
   const preReadingCount = await RecordsRepository.getTotalCount({
     userId: String(id),
     readingState: "pre-reading",
