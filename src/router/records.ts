@@ -9,8 +9,6 @@ const router = express.Router();
 
 router.get("/", isAuth, recordDocs.getRecords, recordsController.getRecords);
 
-router.get("/a", isAuth, recordsController.getRecords);
-
 router.get(
   "/count/by-reading-state",
   isAuth,
