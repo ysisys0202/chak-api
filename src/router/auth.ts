@@ -18,7 +18,6 @@ router.post(
   authDoc.login,
   authController.login
 );
-router.post("/logout", isAuth, authController.logout);
 router.get("/me", isAuth, authDoc.me, authController.me);
 
 export default router;

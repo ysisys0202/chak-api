@@ -5,14 +5,6 @@ import { env } from "../utils/envConfig.js";
 import { generateQueryString } from "../utils/url.js";
 import { formatDate } from "../utils/date.js";
 
-export const getBooks = async (req: Request, res: Response) => {
-  const { title } = req.query;
-  const books = await (title
-    ? BooksRepository.getAllByTitle(title as string)
-    : BooksRepository.getAll());
-  res.status(200).json(books);
-};
-
 export const getBook = async (req: Request, res: Response) => {
   const { isbn } = req.params;
   const book = await BooksRepository.getByIsbn(isbn);

@@ -63,14 +63,6 @@ Book.init(
   }
 );
 
-export const getAll = async () => {
-  return await Book.findAll();
-};
-
-export const getAllByTitle = async (title: string) => {
-  return await Book.findAll({ where: { title } });
-};
-
 export const getByIsbn = async (isbn: string) => {
   return await Book.findOne({ where: { isbn } });
 };

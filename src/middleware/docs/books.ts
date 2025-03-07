@@ -1,16 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 
-export const getBooks = (req: Request, res: Response, next: NextFunction) => {
-  /* 
-
-    #swagger.tags = ['Books']
-    #swagger.summary = '책 목록 조회'
-    #swagger.description = '책 목록을 조회합니다.'    
-    */
-
-  next();
-};
-
 export const getBook = (req: Request, res: Response, next: NextFunction) => {
   /*  
       #swagger.tags = ['Books']
