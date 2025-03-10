@@ -63,7 +63,7 @@ Record.init(
       allowNull: false,
     },
     recordDetail: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1005),
     },
     isPublic: {
       type: DataTypes.BOOLEAN,
