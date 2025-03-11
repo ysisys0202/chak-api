@@ -12,6 +12,7 @@ router.get("/", isAuth, recordDocs.getRecords, recordsController.getRecords);
 router.get(
   "/count/by-reading-state",
   isAuth,
+  recordDocs.getRecordCountByReadingState,
   recordsController.getRecordCountByReadingState
 );
 
