@@ -14,14 +14,14 @@
 
 ## 🛠 기술 스택
 
-| **용도**         | **기술**                        |
-| ---------------- | ------------------------------- |
-| **코어**         | Typescript, Node.js, Express    |
-| **DB 및 ORM**    | MySQL, Sequelize                |
-| **보안 및 인증** | Bcrypt, Jsonwebtoken, Helmet    |
-| **데이터 검증**  | Zod                             |
-| **문서화**       | Swagger                         |
-| **배포**         | (API) Render, (DB) Clever Cloud |
+| **용도**         | **기술**                           |
+| ---------------- | ---------------------------------- |
+| **코어**         | Typescript, Node.js, Express       |
+| **DB 및 ORM**    | MySQL, Sequelize                   |
+| **보안 및 인증** | Bcrypt, Jsonwebtoken, Helmet       |
+| **데이터 검증**  | Zod                                |
+| **문서화**       | Swagger                            |
+| **배포**         | (API) Cloudtype, (DB) Clever Cloud |
 
 ## 📊 ERD
 
@@ -29,7 +29,7 @@
 
 ## 📜 API 문서
 
-[🔗 Swagger 문서 보러가기](https://chak-api.onrender.com/api-docs/)
+[🔗 Swagger 문서 보러가기](https://port-0-chak-api-m84yv9o6d2bfcc1f.sel4.cloudtype.app/api-docs/)
 
 ## ✨ 구현 기능
 
