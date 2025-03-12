@@ -2,7 +2,7 @@
   "name": "chak-api",
   "version": "1.0.0",
   "description": "독서 기록 플랫폼 Chak(채크)의 API 서버",
-  "main": "dist/app.js",
+  "main": "dist/src/app.js",
   "type": "module",
   "scripts": {
     "dev": "concurrently \"tsc -w\" \"nodemon ./dist/src/app\"",
