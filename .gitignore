@@ -16,3 +16,6 @@ build/
 
 # .vscode 설정 파일
 .vscode/
+
+# node_modules
+node_modules/
