@@ -2,7 +2,7 @@
 
 <img src="./public/readme/readme_cover.jpg" alt="Chak API" width="500">
 
-### [배포 화면 보러가기 🚀🚀 ](https://chak-client.pages.dev)
+### [배포 화면 보러가기 🚀🚀 ](https://chak-client.vercel.app)
 
 | 테스트 ID | tester01 |
 | --------- | -------- |
